@@ -18,17 +18,14 @@
         .header { background: var(--primary-bg); color: white; padding: 25px 20px; text-align: center; }
         .header h1 { margin: 0; font-size: 18px; }
         
-        .diagram-container { width: 100%; background: #fff; padding: 10px 0; text-align: center; border-bottom: 1px solid #eee; }
-        .diagram-container img { max-width: 90%; border-radius: 8px; }
-
         .group { padding: 15px 20px; border-bottom: 1px solid #f1f5f9; }
         .group-title { font-size: 11px; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 10px; display: block; }
         .pds-title { color: var(--pds-orange); border-left: 3px solid var(--pds-orange); padding-left: 8px; }
         
-        .input-row { display: flex; gap: 12px; }
+        .input-row { display: flex; gap: 12px; margin-bottom: 10px; }
         .input-col { flex: 1; }
         .input-col label { font-size: 10px; color: #64748b; font-weight: 600; display: block; margin-bottom: 4px; }
-        .input-col input { width: 100%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 14px; outline: none; }
+        .input-col input { width: 100%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 14px; outline: none; box-sizing: border-box; }
 
         .calc-btn { width: calc(100% - 40px); margin: 20px; padding: 16px; background: var(--success-green); color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; }
 
@@ -48,71 +45,61 @@
         <p>Surveying & Calibration Tool</p>
     </div>
 
-    <div class="group"><span class="group-title">Antenna 1 & 2</span>
+    <div class="group">
+        <span class="group-title pds-title">PDS Bucket Geometry (T6 Angle)</span>
         <div class="input-row">
-            <input type="number" id="X1" placeholder="X1"> <input type="number" id="X2" placeholder="X2">
+            <div class="input-col"><label>T1 (Side 1)</label><input type="number" id="T1" step="0.001" placeholder="0.000"></div>
+            <div class="input-col"><label>T5 (Side 2)</label><input type="number" id="T5" step="0.001" placeholder="0.000"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-col"><label>T1S (Opposite Side to T6)</label><input type="number" id="T1S" step="0.001" placeholder="0.000"></div>
         </div>
     </div>
 
     <div class="group">
-        <span class="group-title pds-title">PDS Bucket Geometry (T6 Calculation)</span>
+        <span class="group-title pds-title">PDS Stick Offset (S3)</span>
         <div class="input-row">
-            <div class="input-col"><label>T1 (Horiz.)</label><input type="number" id="T1" placeholder="0.000"></div>
-            <div class="input-col"><label>T5 (Vert.)</label><input type="number" id="T5" placeholder="0.000"></div>
+            <div class="input-col"><label>Point Z</label><input type="number" id="Pz" step="0.001" placeholder="Z"></div>
+            <div class="input-col"><label>Stick Pin Z</label><input type="number" id="SpZ" step="0.001" placeholder="Z"></div>
         </div>
     </div>
 
-    <div class="group">
-        <span class="group-title pds-title">PDS Stick Offset (S3 Calculation)</span>
-        <p style="font-size: 9px; color: #64748b; margin-top: -5px;">ادخل إحداثيات النقطة المرصودة والـ Stick Pin</p>
-        <div class="input-row">
-            <div class="input-col"><label>Point X</label><input type="number" id="Px" placeholder="X"></div>
-            <div class="input-col"><label>Point Y</label><input type="number" id="Py" placeholder="Y"></div>
-            <div class="input-col"><label>Point Z</label><input type="number" id="Pz" placeholder="Z"></div>
-        </div>
-        <div class="input-row" style="margin-top: 10px;">
-            <div class="input-col"><label>Stick Pin Z</label><input type="number" id="SpZ" placeholder="Z"></div>
-            <div class="input-col"><label>S1 (Stick Length)</label><input type="number" id="S1_val" placeholder="S1"></div>
-        </div>
-    </div>
-
-    <button class="calc-btn" onclick="calculate()">Calculate All Results</button>
+    <button class="calc-btn" onclick="calculate()">Calculate PDS Results</button>
 
     <div id="resultsArea" class="results-area">
-        <div style="color: var(--accent-blue); font-weight: bold; border-bottom: 1px solid #334155; padding-bottom: 5px;">SURVEY RESULTS</div>
-        <div class="res-line"><span>Boom Length:</span> <b id="out-boomL">0.000 m</b></div>
-        
-        <div style="color: var(--pds-orange); font-weight: bold; margin-top: 20px; border-bottom: 1px solid #334155; padding-bottom: 5px;">PDS CALIBRATION VALUES</div>
+        <div style="color: var(--pds-orange); font-weight: bold; border-bottom: 1px solid #334155; padding-bottom: 5px;">PDS CALIBRATION VALUES</div>
         <div class="res-line"><span>Tooth Angle (T6):</span> <b id="out-T6" class="pds-res">0.000°</b></div>
         <div class="res-line"><span>Vertical Offset (S3):</span> <b id="out-S3" class="pds-res">0.000 m</b></div>
     </div>
 
-    <div class="footer">Created by Mohamed Shehata - NMDC Projects</div>
+    <div class="footer">Created by Mohamed Shehata - NMDC</div>
 </div>
 
 <script>
     function calculate() {
         const getV = (id) => parseFloat(document.getElementById(id).value) || 0;
 
-        // 1. حساب T6 (Bucket Tooth Angle)
-        // T6 = atan(T5 / T1)
+        // حساب T6 باستخدام قانون جيب التمام (Law of Cosines)
+        // Cos(T6) = (T1² + T5² - T1S²) / (2 * T1 * T5)
         const T1 = getV('T1');
         const T5 = getV('T5');
+        const T1S = getV('T1S');
         let T6 = 0;
-        if (T1 !== 0) {
-            T6 = Math.atan2(T5, T1) * (180 / Math.PI);
+
+        if (T1 > 0 && T5 > 0 && T1S > 0) {
+            const cosT6 = (Math.pow(T1, 2) + Math.pow(T5, 2) - Math.pow(T1S, 2)) / (2 * T1 * T5);
+            // التأكد أن القيمة في نطاق الـ acos (-1 to 1)
+            if (cosT6 >= -1 && cosT6 <= 1) {
+                T6 = Math.acos(cosT6) * (180 / Math.PI);
+            }
         }
 
-        // 2. حساب S3 (Stick Vertical Offset)
-        // بناءً على شرحك، S3 هي المسافة العمودية. لو رصدنا نقطة، الفرق في الـ Z بينها وبين الـ Pin هو الـ Offset العمودي
-        const Pz = getV('Pz');
-        const SpZ = getV('SpZ');
-        const S3 = Math.abs(Pz - SpZ);
+        // حساب S3 (Vertical Offset)
+        const S3 = Math.abs(getV('Pz') - getV('SpZ'));
 
-        // تحديث النتائج
+        // عرض النتائج
         document.getElementById('out-T6').innerText = T6.toFixed(3) + "°";
         document.getElementById('out-S3').innerText = S3.toFixed(3) + " m";
-
         document.getElementById('resultsArea').style.display = "block";
     }
 </script>
