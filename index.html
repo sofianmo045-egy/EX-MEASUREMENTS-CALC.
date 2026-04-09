@@ -11,34 +11,37 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: #0f172a; color: white; margin: 0; padding: 10px; }
         .app-container { max-width: 500px; margin: 0 auto; background: #ffffff; color: #333; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .header { background: #1e293b; color: white; padding: 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 18px; text-transform: uppercase; }
-        .image-container { width: 100%; padding: 10px; text-align: center; }
+        .header h1 { margin: 0; fontSize: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0; font-size: 12px; color: #94a3b8; }
+        .image-container { width: 100%; padding: 10px; box-sizing: border-box; text-align: center; }
         .image-container img { max-width: 100%; border-radius: 10px; }
-        .input-group { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; }
-        .group-title { font-size: 11px; font-weight: bold; color: #1e293b; margin-bottom: 8px; text-transform: uppercase; }
-        .grid { display: flex; gap: 8px; }
+        .input-group { padding: 15px; border-bottom: 1px solid #eee; }
+        .group-title { font-size: 12px; font-weight: bold; color: #1e293b; margin-bottom: 10px; text-transform: uppercase; }
+        .grid { display: flex; gap: 10px; }
         .input-field { flex: 1; }
-        .input-field label { display: block; font-size: 10px; color: #64748b; margin-bottom: 3px; }
-        input { width: 100%; padding: 7px; border: 1px solid #cbd5e1; border-radius: 5px; font-size: 13px; }
-        .calc-btn { width: 90%; margin: 15px 5%; padding: 14px; background: #059669; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .results-area { background: #111827; color: #f8fafc; padding: 20px; }
-        .res-line { display: flex; justify-content: space-between; font-size: 13px; margin: 6px 0; }
-        .linkedin-btn { display: block; text-align: center; margin-top: 15px; padding: 10px; background: #0077b5; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; font-weight: bold; }
-        .install-guide { padding: 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; font-size: 11px; }
-        .guide-grid { display: flex; gap: 15px; margin-top: 10px; }
+        .input-field label { display: block; font-size: 10px; color: #64748b; margin-bottom: 4px; }
+        input { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .calc-btn { width: 90%; margin: 20px 5%; padding: 15px; background: #059669; color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .results-area { background: #1e293b; color: #f8fafc; padding: 20px; }
+        .results-area h2 { font-size: 14px; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-top: 0; }
+        .res-line { display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0; }
+        .offset-section { font-size: 11px; color: #10b981; margin-top: 15px; border-top: 1px dotted #334155; paddingTop: 10px; }
+        .footer-note { padding: 15px; font-size: 11px; color: #64748b; background: #f8fafc; text-align: center; }
     </style>
 </head>
 <body>
     <div id="root"></div>
+
     <script type="text/babel">
         const { useState } = React;
-        const Group = ({ title, keys, data, set }) => (
+
+        const Group = ({ title, keys, labels, data, set }) => (
             <div className="input-group">
                 <div className="group-title">{title}</div>
                 <div className="grid">
-                    {keys.map(k => (
+                    {keys.map((k, i) => (
                         <div key={k} className="input-field">
-                            <label>{k}</label>
+                            <label>{labels[i]}</label>
                             <input type="number" step="0.001" value={data[k] || ""} onChange={(e) => set(k, e.target.value)} />
                         </div>
                     ))}
@@ -53,41 +56,89 @@
 
             const calculate = () => {
                 const d = {};
-                ["X1","Y1","Z1","X2","Y2","Z2","Xs","Ys","Zs","Xp","Yp","Zp","Xst","Yst","Zst","Xbs","Ybs","Zbs","Xb","Yb","Zb"].forEach(k => d[k] = parseFloat(v[k] || 0));
+                const allKeys = ["X1","Y1","Z1","X2","Y2","Z2","Xs","Ys","Zs","Xp","Yp","Zp","Xst","Yst","Zst","Xbs","Ybs","Zbs","Xb","Yb","Zb"];
+                allKeys.forEach(k => d[k] = parseFloat(v[k] || 0));
+
                 const Xc = (d.Xp + d.Xs) / 2, Yc = (d.Yp + d.Ys) / 2, Zc = (d.Zp + d.Zs) / 2;
                 const hR = Math.atan2(d.Xb - Xc, d.Yb - Yc);
-                const getL = (X, Y, Z) => ({ F: (Y-Yc)*Math.cos(hR)+(X-Xc)*Math.sin(hR), S: (X-Xc)*Math.cos(hR)-(Y-Yc)*Math.sin(hR), U: Z-Zc });
-                setRes({ h: ((hR*180/Math.PI)+360)%360, a1: getL(d.X1,d.Y1,d.Z1), a2: getL(d.X2,d.Y2,d.Z2), b: Math.sqrt((d.Xst-d.Xs)**2+(d.Yst-d.Ys)**2+(d.Zst-d.Zs)**2), s: Math.sqrt((d.Xbs-d.Xst)**2+(d.Ybs-d.Yst)**2+(d.Zbs-d.Zst)**2) });
+                const getLocal = (X, Y, Z) => ({
+                    F: (Y - Yc) * Math.cos(hR) + (X - Xc) * Math.sin(hR),
+                    S: (X - Xc) * Math.cos(hR) - (Y - Yc) * Math.sin(hR),
+                    U: Z - Zc
+                });
+                const dist = (x1,y1,z1,x2,y2,z2) => Math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2);
+
+                setRes({
+                    h: ((hR * 180) / Math.PI + 360) % 360,
+                    antH: Math.sqrt((d.X2-d.X1)**2 + (d.Y2-d.Y1)**2),
+                    a1: getLocal(d.X1, d.Y1, d.Z1),
+                    a2: getLocal(d.X2, d.Y2, d.Z2),
+                    boom: dist(d.Xs, d.Ys, d.Zs, d.Xst, d.Yst, d.Zst),
+                    stick: dist(d.Xst, d.Yst, d.Zst, d.Xbs, d.Ybs, d.Zbs)
+                });
             };
 
             return (
                 <div className="app-container">
-                    <div className="header"><h1>EX. Measurements</h1><p>Created by Mohamed Shehata</p></div>
-                    <div className="image-container"><img src="excavator-diagram.png" /></div>
-                    <Group title="ANTENNA 1" keys={["X1","Y1","Z1"]} data={v} set={update} />
-                    <Group title="ANTENNA 2" keys={["X2","Y2","Z2"]} data={v} set={update} />
-                    <Group title="BOOM PIN STARBOARD" keys={["Xs","Ys","Zs"]} data={v} set={update} />
-                    <Group title="BOOM PIN PORTSIDE" keys={["Xp","Yp","Zp"]} data={v} set={update} />
+                    <div className="header">
+                        <h1>EX. Measurements Calculator</h1>
+                        <p>Excavator / Machinery Surveying Tool</p>
+                        <p style={{color: '#38bdf8'}}>Created by Mohamed Shehata</p>
+                    </div>
+<a href="https://linkedin.com/in/mohamed-shehata-m045" target="_blank" className="linkedin-btn">
+    Contact me on LinkedIn
+</a>
+                    <div className="image-container">
+                        <img src="excavator-diagram.png" alt="Excavator Diagram" />
+                    </div>
+
+                    <Group title="ANTENNA 1" keys={["X1","Y1","Z1"]} labels={["X1","Y1","Z1"]} data={v} set={update} />
+                    <Group title="ANTENNA 2" keys={["X2","Y2","Z2"]} labels={["X2","Y2","Z2"]} data={v} set={update} />
+                    <Group title="BOOM PIN STARBOARD" keys={["Xs","Ys","Zs"]} labels={["Xs","Ys","Zs"]} data={v} set={update} />
+                    <Group title="BOOM PIN PORTSIDE" keys={["Xp","Yp","Zp"]} labels={["Xp","Yp","Zp"]} data={v} set={update} />
+                    <Group title="STICK PIN STARBOARD" keys={["Xst","Yst","Zst"]} labels={["Xst","Yst","Zst"]} data={v} set={update} />
+                    <Group title="BUCKET PIN STARBOARD" keys={["Xbs","Ybs","Zbs"]} labels={["Xbs","Ybs","Zbs"]} data={v} set={update} />
+                    <Group title="BUCKET CENTER" keys={["Xb","Yb","Zb"]} labels={["Xb","Yb","Zb"]} data={v} set={update} />
+
                     <button className="calc-btn" onClick={calculate}>Calculate Results</button>
+
                     {res && (
                         <div className="results-area">
-                            <div className="res-line"><span>Heading:</span> <b>{res.h.toFixed(3)}°</b></div>
-                            <div className="res-line"><span>Boom Length:</span> <b>{res.b.toFixed(3)} m</b></div>
-                            <div className="res-line"><span>Stick Length:</span> <b>{res.s.toFixed(3)} m</b></div>
-                            <a href="https://linkedin.com/in/mohamed-shehata-m045" target="_blank" className="linkedin-btn">Contact me on LinkedIn</a>
+                            <h2>RESULTS</h2>
+                            <div className="res-line"><span>Machine Heading:</span> <b>{res.h.toFixed(3)}°</b></div>
+                            <div className="res-line"><span>Antenna H-Distance:</span> <b>{res.antH.toFixed(3)} m</b></div>
+                            
+                            <div className="offset-section">
+                                <b>ANTENNA 1 - OFFSETS FROM CENTER OF BOOM</b>
+                                <div className="res-line"><span>Forward (Y):</span> <b>{res.a1.F.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Starboard (X):</span> <b>{res.a1.S.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Up (Z):</span> <b>{res.a1.U.toFixed(3)} m</b></div>
+                            </div>
+
+                            <div className="offset-section">
+                                <b>ANTENNA 2 - OFFSETS FROM CENTER OF BOOM</b>
+                                <div className="res-line"><span>Forward (Y):</span> <b>{res.a2.F.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Starboard (X):</span> <b>{res.a2.S.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Up (Z):</span> <b>{res.a2.U.toFixed(3)} m</b></div>
+                            </div>
+
+                            <div className="offset-section" style={{color: '#fff'}}>
+                                <div className="res-line"><span>Boom Length:</span> <b>{res.boom.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Stick Length:</span> <b>{res.stick.toFixed(3)} m</b></div>
+                            </div>
                         </div>
                     )}
-                    <div className="install-guide">
-                        <b>Install as Mobile App</b>
-                        <div className="guide-grid">
-                            <div><b>iOS:</b> Share ➔ Add to Home Screen</div>
-                            <div><b>Android:</b> Menu ➔ Add to Home screen</div>
-                        </div>
+
+                    <div className="footer-note">
+                        <b>Install as Mobile App</b><br/>
+                        Android: Menu ➔ Add to Home screen
                     </div>
                 </div>
             );
         }
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
