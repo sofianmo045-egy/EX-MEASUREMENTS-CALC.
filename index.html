@@ -129,16 +129,17 @@
                         </div>
                     )}
 
-                    <div className="footer-note">
-                        <b>Install as Mobile App</b><br/>
-                        Android: Menu ➔ Add to Home screen
+            <div className="install-guide">
+                        <b>Install as Mobile App</b>
+                        <div className="guide-grid">
+                            <div><b>iOS:</b> Share ➔ Add to Home Screen</div>
+                            <div><b>Android:</b> Menu ➔ Add to Home screen</div>
+                        </div>
                     </div>
                 </div>
             );
         }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
 </body>
 </html>
