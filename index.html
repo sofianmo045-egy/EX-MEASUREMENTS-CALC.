@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EX-MEASUREMENTS - Mohamed Shehata</title>
+    <title>EX. Measurements Calculator</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 10px; }
-        #root { max-width: 600px; margin: 0 auto; }
-        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        label { font-size: 11px; font-weight: bold; color: #555; display: block; margin-bottom: 4px; }
-        .grid { display: flex; gap: 8px; flex-wrap: wrap; }
-        .grid-item { flex: 1 1 30%; min-width: 80px; margin-bottom: 10px; }
-        .group-box { padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; }
-        .result-box { background: #2c3e50; color: white; padding: 15px; border-radius: 10px; margin-top: 10px; }
-        .result-item { display: flex; justify-content: space-between; border-bottom: 1px solid #444; padding: 5px 0; }
-        .header { text-align: center; color: #d35400; margin-bottom: 15px; }
-        .footer { font-size: 12px; text-align: center; color: #777; margin-top: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0f172a; color: white; margin: 0; padding: 10px; }
+        .app-container { max-width: 500px; margin: 0 auto; background: #ffffff; color: #333; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .header { background: #1e293b; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; fontSize: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .header p { margin: 5px 0 0; font-size: 12px; color: #94a3b8; }
+        .image-container { width: 100%; padding: 10px; box-sizing: border-box; text-align: center; }
+        .image-container img { max-width: 100%; border-radius: 10px; }
+        .input-group { padding: 15px; border-bottom: 1px solid #eee; }
+        .group-title { font-size: 12px; font-weight: bold; color: #1e293b; margin-bottom: 10px; text-transform: uppercase; }
+        .grid { display: flex; gap: 10px; }
+        .input-field { flex: 1; }
+        .input-field label { display: block; font-size: 10px; color: #64748b; margin-bottom: 4px; }
+        input { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .calc-btn { width: 90%; margin: 20px 5%; padding: 15px; background: #059669; color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .results-area { background: #1e293b; color: #f8fafc; padding: 20px; }
+        .results-area h2 { font-size: 14px; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-top: 0; }
+        .res-line { display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0; }
+        .offset-section { font-size: 11px; color: #10b981; margin-top: 15px; border-top: 1px dotted #334155; paddingTop: 10px; }
+        .footer-note { padding: 15px; font-size: 11px; color: #64748b; background: #f8fafc; text-align: center; }
     </style>
 </head>
 <body>
@@ -28,60 +35,101 @@
     <script type="text/babel">
         const { useState } = React;
 
-        const Input = ({ name, val, set }) => (
-            <div className="grid-item">
-                <label>{name}</label>
-                <input type="number" step="0.001" value={val || ""} onChange={(e) => set(name, e.target.value)} />
-            </div>
-        );
-
-        const Group = ({ title, keys, data, set, bg }) => (
-            <div className="group-box" style={{ background: bg }}>
-                <h4 style={{ margin: "0 0 10px 0", fontSize: "13px" }}>{title}</h4>
+        const Group = ({ title, keys, labels, data, set }) => (
+            <div className="input-group">
+                <div className="group-title">{title}</div>
                 <div className="grid">
-                    {keys.map(k => <Input key={k} name={k} val={data[k]} set={set} />)}
+                    {keys.map((k, i) => (
+                        <div key={k} className="input-field">
+                            <label>{labels[i]}</label>
+                            <input type="number" step="0.001" value={data[k] || ""} onChange={(e) => set(k, e.target.value)} />
+                        </div>
+                    ))}
                 </div>
             </div>
         );
 
         function App() {
-            const [data, setData] = useState({});
-            const set = (k, v) => setData(prev => ({ ...prev, [k]: parseFloat(v) || 0 }));
+            const [v, setV] = useState({});
+            const [res, setRes] = useState(null);
+            const update = (k, val) => setV(prev => ({ ...prev, [k]: val }));
 
-            // الحسابات الرياضية المأخوذة من الكود الخاص بك
-            const hDist = (p1, p2) => Math.sqrt(Math.pow((data[`${p2}E`] - data[`${p1}E`]), 2) + Math.pow((data[`${p2}N`] - data[`${p1}N`]), 2));
-            const heading = (Math.atan2((data.G2E - data.G1E), (data.G2N - data.G1N)) * 180) / Math.PI;
-            
-            const boomLen = hDist('P1', 'P2');
-            const stickLen = hDist('P2', 'P3');
-            const bucketLen = hDist('P3', 'P4');
+            const calculate = () => {
+                const d = {};
+                const allKeys = ["X1","Y1","Z1","X2","Y2","Z2","Xs","Ys","Zs","Xp","Yp","Zp","Xst","Yst","Zst","Xbs","Ybs","Zbs","Xb","Yb","Zb"];
+                allKeys.forEach(k => d[k] = parseFloat(v[k] || 0));
+
+                const Xc = (d.Xp + d.Xs) / 2, Yc = (d.Yp + d.Ys) / 2, Zc = (d.Zp + d.Zs) / 2;
+                const hR = Math.atan2(d.Xb - Xc, d.Yb - Yc);
+                const getLocal = (X, Y, Z) => ({
+                    F: (Y - Yc) * Math.cos(hR) + (X - Xc) * Math.sin(hR),
+                    S: (X - Xc) * Math.cos(hR) - (Y - Yc) * Math.sin(hR),
+                    U: Z - Zc
+                });
+                const dist = (x1,y1,z1,x2,y2,z2) => Math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2);
+
+                setRes({
+                    h: ((hR * 180) / Math.PI + 360) % 360,
+                    antH: Math.sqrt((d.X2-d.X1)**2 + (d.Y2-d.Y1)**2),
+                    a1: getLocal(d.X1, d.Y1, d.Z1),
+                    a2: getLocal(d.X2, d.Y2, d.Z2),
+                    boom: dist(d.Xs, d.Ys, d.Zs, d.Xst, d.Yst, d.Zst),
+                    stick: dist(d.Xst, d.Yst, d.Zst, d.Xbs, d.Ybs, d.Zbs)
+                });
+            };
 
             return (
-                <div className="card">
+                <div className="app-container">
                     <div className="header">
-                        <h2 style={{margin:0}}>EX-MEASUREMENTS</h2>
-                        <small>Senior Hydrographic Surveyor Tools</small>
+                        <h1>EX. Measurements Calculator</h1>
+                        <p>Excavator / Machinery Surveying Tool</p>
+                        <p style={{color: '#38bdf8'}}>Created by Mohamed Shehata</p>
                     </div>
 
-                    <Group title="GPS Antennas (G1 & G2)" keys={['G1N', 'G1E', 'G1Z', 'G2N', 'G2E', 'G2Z']} data={data} set={set} bg="#eef2f7" />
-                    <Group title="Boom Points (P1 & P2)" keys={['P1N', 'P1E', 'P1Z', 'P2N', 'P2E', 'P2Z']} data={data} set={set} bg="#fff9f0" />
-                    <Group title="Stick & Bucket (P3 & P4)" keys={['P3N', 'P3E', 'P3Z', 'P4N', 'P4E', 'P4Z']} data={data} set={set} bg="#f0fff4" />
-
-                    <div className="result-box">
-                        <h4 style={{margin:"0 0 10px 0", color:"#f1c40f"}}>Calculated Results (Meters)</h4>
-                        <div className="result-item"><span>Boom Length:</span> <b>{boomLen.toFixed(3)}</b></div>
-                        <div className="result-item"><span>Stick Length:</span> <b>{stickLen.toFixed(3)}</b></div>
-                        <div className="result-item"><span>Bucket Length:</span> <b>{bucketLen.toFixed(3)}</b></div>
-                        <div className="result-item"><span>Heading:</span> <b>{heading.toFixed(2)}°</b></div>
+                    <div className="image-container">
+                        <img src="excavator-diagram.png" alt="Excavator Diagram" />
                     </div>
 
-                    <div className="footer">
-                        <p>Developed by: <b>Mohamed Shehata</b></p>
-                        <div style={{background:"#fff", padding:"10px", borderRadius:"8px", color:"#333", border:"1px solid #ddd"}}>
-                            <b>Install as App:</b><br/>
-                            Android: Menu ➔ Add to Home Screen<br/>
-                            iOS: Share ➔ Add to Home Screen
+                    <Group title="ANTENNA 1" keys={["X1","Y1","Z1"]} labels={["X1","Y1","Z1"]} data={v} set={update} />
+                    <Group title="ANTENNA 2" keys={["X2","Y2","Z2"]} labels={["X2","Y2","Z2"]} data={v} set={update} />
+                    <Group title="BOOM PIN STARBOARD" keys={["Xs","Ys","Zs"]} labels={["Xs","Ys","Zs"]} data={v} set={update} />
+                    <Group title="BOOM PIN PORTSIDE" keys={["Xp","Yp","Zp"]} labels={["Xp","Yp","Zp"]} data={v} set={update} />
+                    <Group title="STICK PIN STARBOARD" keys={["Xst","Yst","Zst"]} labels={["Xst","Yst","Zst"]} data={v} set={update} />
+                    <Group title="BUCKET PIN STARBOARD" keys={["Xbs","Ybs","Zbs"]} labels={["Xbs","Ybs","Zbs"]} data={v} set={update} />
+                    <Group title="BUCKET CENTER" keys={["Xb","Yb","Zb"]} labels={["Xb","Yb","Zb"]} data={v} set={update} />
+
+                    <button className="calc-btn" onClick={calculate}>Calculate Results</button>
+
+                    {res && (
+                        <div className="results-area">
+                            <h2>RESULTS</h2>
+                            <div className="res-line"><span>Machine Heading:</span> <b>{res.h.toFixed(3)}°</b></div>
+                            <div className="res-line"><span>Antenna H-Distance:</span> <b>{res.antH.toFixed(3)} m</b></div>
+                            
+                            <div className="offset-section">
+                                <b>ANTENNA 1 - OFFSETS FROM CENTER OF BOOM</b>
+                                <div className="res-line"><span>Forward (Y):</span> <b>{res.a1.F.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Starboard (X):</span> <b>{res.a1.S.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Up (Z):</span> <b>{res.a1.U.toFixed(3)} m</b></div>
+                            </div>
+
+                            <div className="offset-section">
+                                <b>ANTENNA 2 - OFFSETS FROM CENTER OF BOOM</b>
+                                <div className="res-line"><span>Forward (Y):</span> <b>{res.a2.F.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Starboard (X):</span> <b>{res.a2.S.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Up (Z):</span> <b>{res.a2.U.toFixed(3)} m</b></div>
+                            </div>
+
+                            <div className="offset-section" style={{color: '#fff'}}>
+                                <div className="res-line"><span>Boom Length:</span> <b>{res.boom.toFixed(3)} m</b></div>
+                                <div className="res-line"><span>Stick Length:</span> <b>{res.stick.toFixed(3)} m</b></div>
+                            </div>
                         </div>
+                    )}
+
+                    <div className="footer-note">
+                        <b>Install as Mobile App</b><br/>
+                        Android: Menu ➔ Add to Home screen
                     </div>
                 </div>
             );
