@@ -146,13 +146,11 @@
 
     <script>
         function calculate() {
-            // منطق الحساب يوضع هنا، حالياً يقوم فقط بإظهار القسم
             document.getElementById('results-area').classList.remove('hidden');
             window.scrollTo({ top: document.getElementById('results-area').offsetTop - 50, behavior: 'smooth' });
         }
 
         function exportTxt() {
-            // تجميع كافة البيانات للتقرير
             const data = {
                 heading: document.getElementById('res-heading').innerText,
                 corr: document.getElementById('res-corr').innerText,
@@ -190,8 +188,7 @@
             content += `- Stick Length (S1): ${data.stick}\n`;
             content += `- Stick Hor. Offset (S3): ${data.s3}\n`;
             content += `- Tooth Angle (T6): ${data.t6}\n`;
-            content += `\n====================================\n`;
-            content += `Created by Mohamed Shehata - NMDC`;
+            content += `\n====================================`;
 
             const blob = new Blob([content], { type: 'text/plain' });
             const link = document.createElement('a');
