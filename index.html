@@ -190,12 +190,12 @@
         </div>
         <div class="res-line"><span>Antenna H-Distance:</span> <b id="out-antDist">-</b></div>
 
-        <div class="offset-title">Antenna 1 - Offsets (Boom Pin Center)</div>
+        <div class="offset-title">Antenna 1 - Offsets (Reference Point Boom Pin Center)</div>
         <div class="res-line"><span>Forward (Y):</span> <b id="out-a1F">-</b></div>
         <div class="res-line"><span>Starboard (X):</span> <b id="out-a1S">-</b></div>
         <div class="res-line"><span>Up (Z):</span> <b id="out-a1U">-</b></div>
 
-        <div class="offset-title">Antenna 2 - Offsets (Boom Pin Center)</div>
+        <div class="offset-title">Antenna 2 - Offsets (Reference Point Boom Pin Center)</div>
         <div class="res-line"><span>Forward (Y):</span> <b id="out-a2F">-</b></div>
         <div class="res-line"><span>Starboard (X):</span> <b id="out-a2S">-</b></div>
         <div class="res-line"><span>Up (Z):</span> <b id="out-a2U">-</b></div>
@@ -219,7 +219,6 @@
     let reportData = "";
 
     function calculate() {
-        // دالة لجلب القيمة أو إرجاع null إذا كانت فارغة
         const getV = (id) => {
             const val = document.getElementById(id).value;
             return val === "" ? null : parseFloat(val);
@@ -237,7 +236,6 @@
 
         const format = (val, unit = "") => (val === null || isNaN(val)) ? "no inputs" : val.toFixed(3) + unit;
 
-        // الحسابات الأساسية مع التحقق من وجود المدخلات
         let mH = null, hC = null, antDist = null, boomL = null, stickL = null;
         let a1 = {F: null, S: null, U: null}, a2 = {F: null, S: null, U: null};
 
@@ -275,7 +273,6 @@
             }
         }
 
-        // تحديث الواجهة
         document.getElementById('out-mH').innerText = format(mH, "°");
         document.getElementById('out-hC').innerText = format(hC, "°");
         document.getElementById('out-antDist').innerText = format(antDist, " m");
