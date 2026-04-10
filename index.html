@@ -39,7 +39,6 @@
         .header p { margin: 5px 0; font-size: 12px; color: var(--text-gray); }
         .header a { color: var(--accent-blue); text-decoration: none; font-weight: bold; }
 
-        /* تنسيق صورة الديجرام */
         .diagram-container {
             width: 100%;
             background: #fff;
@@ -113,7 +112,6 @@
         <p>Created by <a href="https://linkedin.com/in/mohamed-shehata-m045" target="_blank">Mohamed Shehata</a></p>
     </div>
 
-    <!-- الجزء الخاص بالصورة -->
     <div class="diagram-container">
         <img src="excavator-diagram.png" alt="Excavator Diagram" onerror="this.style.display='none'">
     </div>
@@ -121,64 +119,63 @@
     <div class="group" style="background: #f8fbff;">
         <span class="group-title">ANTENNA 1</span>
         <div class="input-row">
-            <div class="input-col"><label>X1</label><input type="number" step="0.001" id="X1" placeholder="0.000"></div>
-            <div class="input-col"><label>Y1</label><input type="number" step="0.001" id="Y1" placeholder="0.000"></div>
-            <div class="input-col"><label>Z1</label><input type="number" step="0.001" id="Z1" placeholder="0.000"></div>
+            <div class="input-col"><label>X1</label><input type="number" step="0.001" id="X1" placeholder="-"></div>
+            <div class="input-col"><label>Y1</label><input type="number" step="0.001" id="Y1" placeholder="-"></div>
+            <div class="input-col"><label>Z1</label><input type="number" step="0.001" id="Z1" placeholder="-"></div>
         </div>
     </div>
 
-    <!-- باقي المدخلات كما هي -->
     <div class="group" style="background: #f8fbff;">
         <span class="group-title">ANTENNA 2</span>
         <div class="input-row">
-            <div class="input-col"><label>X2</label><input type="number" step="0.001" id="X2" placeholder="0.000"></div>
-            <div class="input-col"><label>Y2</label><input type="number" step="0.001" id="Y2" placeholder="0.000"></div>
-            <div class="input-col"><label>Z2</label><input type="number" step="0.001" id="Z2" placeholder="0.000"></div>
+            <div class="input-col"><label>X2</label><input type="number" step="0.001" id="X2" placeholder="-"></div>
+            <div class="input-col"><label>Y2</label><input type="number" step="0.001" id="Y2" placeholder="-"></div>
+            <div class="input-col"><label>Z2</label><input type="number" step="0.001" id="Z2" placeholder="-"></div>
         </div>
     </div>
 
     <div class="group">
         <span class="group-title">BOOM PIN STARBOARD</span>
         <div class="input-row">
-            <div class="input-col"><label>Xs</label><input type="number" step="0.001" id="Xs" placeholder="0.000"></div>
-            <div class="input-col"><label>Ys</label><input type="number" step="0.001" id="Ys" placeholder="0.000"></div>
-            <div class="input-col"><label>Zs</label><input type="number" step="0.001" id="Zs" placeholder="0.000"></div>
+            <div class="input-col"><label>Xs</label><input type="number" step="0.001" id="Xs" placeholder="-"></div>
+            <div class="input-col"><label>Ys</label><input type="number" step="0.001" id="Ys" placeholder="-"></div>
+            <div class="input-col"><label>Zs</label><input type="number" step="0.001" id="Zs" placeholder="-"></div>
         </div>
     </div>
 
     <div class="group">
         <span class="group-title">BOOM PIN PORTSIDE</span>
         <div class="input-row">
-            <div class="input-col"><label>Xp</label><input type="number" step="0.001" id="Xp" placeholder="0.000"></div>
-            <div class="input-col"><label>Yp</label><input type="number" step="0.001" id="Yp" placeholder="0.000"></div>
-            <div class="input-col"><label>Zp</label><input type="number" step="0.001" id="Zp" placeholder="0.000"></div>
+            <div class="input-col"><label>Xp</label><input type="number" step="0.001" id="Xp" placeholder="-"></div>
+            <div class="input-col"><label>Yp</label><input type="number" step="0.001" id="Yp" placeholder="-"></div>
+            <div class="input-col"><label>Zp</label><input type="number" step="0.001" id="Zp" placeholder="-"></div>
         </div>
     </div>
 
     <div class="group">
         <span class="group-title">STICK PIN STARBOARD</span>
         <div class="input-row">
-            <div class="input-col"><label>Xst</label><input type="number" step="0.001" id="Xst" placeholder="0.000"></div>
-            <div class="input-col"><label>Yst</label><input type="number" step="0.001" id="Yst" placeholder="0.000"></div>
-            <div class="input-col"><label>Zst</label><input type="number" step="0.001" id="Zst" placeholder="0.000"></div>
+            <div class="input-col"><label>Xst</label><input type="number" step="0.001" id="Xst" placeholder="-"></div>
+            <div class="input-col"><label>Yst</label><input type="number" step="0.001" id="Yst" placeholder="-"></div>
+            <div class="input-col"><label>Zst</label><input type="number" step="0.001" id="Zst" placeholder="-"></div>
         </div>
     </div>
 
     <div class="group">
         <span class="group-title">BUCKET PIN STARBOARD</span>
         <div class="input-row">
-            <div class="input-col"><label>Xbs</label><input type="number" step="0.001" id="Xbs" placeholder="0.000"></div>
-            <div class="input-col"><label>Ybs</label><input type="number" step="0.001" id="Ybs" placeholder="0.000"></div>
-            <div class="input-col"><label>Zbs</label><input type="number" step="0.001" id="Zbs" placeholder="0.000"></div>
+            <div class="input-col"><label>Xbs</label><input type="number" step="0.001" id="Xbs" placeholder="-"></div>
+            <div class="input-col"><label>Ybs</label><input type="number" step="0.001" id="Ybs" placeholder="-"></div>
+            <div class="input-col"><label>Zbs</label><input type="number" step="0.001" id="Zbs" placeholder="-"></div>
         </div>
     </div>
 
     <div class="group" style="background: #f0fff4;">
         <span class="group-title">BUCKET CENTER</span>
         <div class="input-row">
-            <div class="input-col"><label>Xb</label><input type="number" step="0.001" id="Xb" placeholder="0.000"></div>
-            <div class="input-col"><label>Yb</label><input type="number" step="0.001" id="Yb" placeholder="0.000"></div>
-            <div class="input-col"><label>Zb</label><input type="number" step="0.001" id="Zb" placeholder="0.000"></div>
+            <div class="input-col"><label>Xb</label><input type="number" step="0.001" id="Xb" placeholder="-"></div>
+            <div class="input-col"><label>Yb</label><input type="number" step="0.001" id="Yb" placeholder="-"></div>
+            <div class="input-col"><label>Zb</label><input type="number" step="0.001" id="Zb" placeholder="-"></div>
         </div>
     </div>
 
@@ -187,26 +184,26 @@
     <div id="resultsArea" class="results-area">
         <div style="border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; font-size: 16px; font-weight: bold; color: var(--accent-blue);">CALCULATION RESULTS</div>
         
-        <div class="res-line"><span>Machine Heading:</span> <b id="out-mH">0.000°</b></div>
+        <div class="res-line"><span>Machine Heading:</span> <b id="out-mH">-</b></div>
         <div class="res-line" style="border-left: 3px solid #fcd34d; padding-left: 10px;">
-            <span style="color: #fcd34d;">Heading Correction:</span> <b id="out-hC" style="color: #fcd34d;">0.000°</b>
+            <span style="color: #fcd34d;">Heading Correction:</span> <b id="out-hC" style="color: #fcd34d;">-</b>
         </div>
-        <div class="res-line"><span>Antenna H-Distance:</span> <b id="out-antDist">0.000 m</b></div>
+        <div class="res-line"><span>Antenna H-Distance:</span> <b id="out-antDist">-</b></div>
 
         <div class="offset-title">Antenna 1 - Offsets (Boom Pin Center)</div>
-        <div class="res-line"><span>Forward (Y):</span> <b id="out-a1F">0.000 m</b></div>
-        <div class="res-line"><span>Starboard (X):</span> <b id="out-a1S">0.000 m</b></div>
-        <div class="res-line"><span>Up (Z):</span> <b id="out-a1U">0.000 m</b></div>
+        <div class="res-line"><span>Forward (Y):</span> <b id="out-a1F">-</b></div>
+        <div class="res-line"><span>Starboard (X):</span> <b id="out-a1S">-</b></div>
+        <div class="res-line"><span>Up (Z):</span> <b id="out-a1U">-</b></div>
 
         <div class="offset-title">Antenna 2 - Offsets (Boom Pin Center)</div>
-        <div class="res-line"><span>Forward (Y):</span> <b id="out-a2F">0.000 m</b></div>
-        <div class="res-line"><span>Starboard (X):</span> <b id="out-a2S">0.000 m</b></div>
-        <div class="res-line"><span>Up (Z):</span> <b id="out-a2U">0.000 m</b></div>
+        <div class="res-line"><span>Forward (Y):</span> <b id="out-a2F">-</b></div>
+        <div class="res-line"><span>Starboard (X):</span> <b id="out-a2S">-</b></div>
+        <div class="res-line"><span>Up (Z):</span> <b id="out-a2U">-</b></div>
 
         <div class="res-line" style="margin-top: 15px; border-top: 2px solid #1e293b; padding-top: 10px;">
-            <span>Boom Length:</span> <b id="out-boomL">0.000 m</b>
+            <span>Boom Length:</span> <b id="out-boomL">-</b>
         </div>
-        <div class="res-line"><span>Stick Length:</span> <b id="out-stickL">0.000 m</b></div>
+        <div class="res-line"><span>Stick Length:</span> <b id="out-stickL">-</b></div>
         
         <button class="export-btn" onclick="exportTxt()">Export Results (.txt)</button>
     </div>
@@ -220,8 +217,14 @@
 
 <script>
     let reportData = "";
+
     function calculate() {
-        const getV = (id) => parseFloat(document.getElementById(id).value) || 0;
+        // دالة لجلب القيمة أو إرجاع null إذا كانت فارغة
+        const getV = (id) => {
+            const val = document.getElementById(id).value;
+            return val === "" ? null : parseFloat(val);
+        };
+
         const d = {
             X1: getV('X1'), Y1: getV('Y1'), Z1: getV('Z1'),
             X2: getV('X2'), Y2: getV('Y2'), Z2: getV('Z2'),
@@ -231,41 +234,69 @@
             Xbs: getV('Xbs'), Ybs: getV('Ybs'), Zbs: getV('Zbs'),
             Xb: getV('Xb'), Yb: getV('Yb'), Zb: getV('Zb')
         };
-        const Xc = (d.Xp + d.Xs) / 2, Yc = (d.Yp + d.Ys) / 2, Zc = (d.Zp + d.Zs) / 2;
-        const hR = Math.atan2(d.Xb - Xc, d.Yb - Yc);
-        const mH = ((hR * 180) / Math.PI + 360) % 360;
-        const aH = ((Math.atan2(d.X2 - d.X1, d.Y2 - d.Y1) * 180) / Math.PI + 360) % 360;
-        let hC = mH - aH; if (hC > 180) hC -= 360; if (hC < -180) hC += 360;
-        const getOffsets = (X, Y, Z) => ({
-            F: (Y - Yc) * Math.cos(hR) + (X - Xc) * Math.sin(hR),
-            S: (X - Xc) * Math.cos(hR) - (Y - Yc) * Math.sin(hR),
-            U: Z - Zc
-        });
-        const a1 = getOffsets(d.X1, d.Y1, d.Z1);
-        const a2 = getOffsets(d.X2, d.Y2, d.Z2);
-        const antDist = Math.sqrt((d.X2 - d.X1)**2 + (d.Y2 - d.Y1)**2);
-        const boomL = Math.sqrt((Xc - d.Xst)**2 + (Yc - d.Yst)**2 + (Zc - d.Zst)**2);
-        const stickL = Math.sqrt((d.Xst - d.Xbs)**2 + (d.Yst - d.Ybs)**2 + (d.Zst - d.Zbs)**2);
 
-        document.getElementById('out-mH').innerText = mH.toFixed(3) + "°";
-        document.getElementById('out-hC').innerText = hC.toFixed(3) + "°";
-        document.getElementById('out-antDist').innerText = antDist.toFixed(3) + " m";
-        document.getElementById('out-a1F').innerText = a1.F.toFixed(3) + " m";
-        document.getElementById('out-a1S').innerText = a1.S.toFixed(3) + " m";
-        document.getElementById('out-a1U').innerText = a1.U.toFixed(3) + " m";
-        document.getElementById('out-a2F').innerText = a2.F.toFixed(3) + " m";
-        document.getElementById('out-a2S').innerText = a2.S.toFixed(3) + " m";
-        document.getElementById('out-a2U').innerText = a2.U.toFixed(3) + " m";
-        document.getElementById('out-boomL').innerText = boomL.toFixed(3) + " m";
-        document.getElementById('out-stickL').innerText = stickL.toFixed(3) + " m";
+        const format = (val, unit = "") => (val === null || isNaN(val)) ? "no inputs" : val.toFixed(3) + unit;
+
+        // الحسابات الأساسية مع التحقق من وجود المدخلات
+        let mH = null, hC = null, antDist = null, boomL = null, stickL = null;
+        let a1 = {F: null, S: null, U: null}, a2 = {F: null, S: null, U: null};
+
+        if (d.Xp !== null && d.Xs !== null && d.Yp !== null && d.Ys !== null && d.Zp !== null && d.Zs !== null) {
+            const Xc = (d.Xp + d.Xs) / 2, Yc = (d.Yp + d.Ys) / 2, Zc = (d.Zp + d.Zs) / 2;
+
+            if (d.Xb !== null && d.Yb !== null) {
+                const hR = Math.atan2(d.Xb - Xc, d.Yb - Yc);
+                mH = ((hR * 180) / Math.PI + 360) % 360;
+
+                const getOffsets = (X, Y, Z) => {
+                    if (X === null || Y === null || Z === null) return {F: null, S: null, U: null};
+                    return {
+                        F: (Y - Yc) * Math.cos(hR) + (X - Xc) * Math.sin(hR),
+                        S: (X - Xc) * Math.cos(hR) - (Y - Yc) * Math.sin(hR),
+                        U: Z - Zc
+                    };
+                };
+
+                a1 = getOffsets(d.X1, d.Y1, d.Z1);
+                a2 = getOffsets(d.X2, d.Y2, d.Z2);
+
+                if (d.X1 !== null && d.Y1 !== null && d.X2 !== null && d.Y2 !== null) {
+                    const aH = ((Math.atan2(d.X2 - d.X1, d.Y2 - d.Y1) * 180) / Math.PI + 360) % 360;
+                    hC = mH - aH; if (hC > 180) hC -= 360; if (hC < -180) hC += 360;
+                    antDist = Math.sqrt((d.X2 - d.X1)**2 + (d.Y2 - d.Y1)**2);
+                }
+            }
+
+            if (d.Xst !== null && d.Yst !== null && d.Zst !== null) {
+                boomL = Math.sqrt((Xc - d.Xst)**2 + (Yc - d.Yst)**2 + (Zc - d.Zst)**2);
+                if (d.Xbs !== null && d.Ybs !== null && d.Zbs !== null) {
+                    stickL = Math.sqrt((d.Xst - d.Xbs)**2 + (d.Yst - d.Ybs)**2 + (d.Zst - d.Zbs)**2);
+                }
+            }
+        }
+
+        // تحديث الواجهة
+        document.getElementById('out-mH').innerText = format(mH, "°");
+        document.getElementById('out-hC').innerText = format(hC, "°");
+        document.getElementById('out-antDist').innerText = format(antDist, " m");
+        document.getElementById('out-a1F').innerText = format(a1.F, " m");
+        document.getElementById('out-a1S').innerText = format(a1.S, " m");
+        document.getElementById('out-a1U').innerText = format(a1.U, " m");
+        document.getElementById('out-a2F').innerText = format(a2.F, " m");
+        document.getElementById('out-a2S').innerText = format(a2.S, " m");
+        document.getElementById('out-a2U').innerText = format(a2.U, " m");
+        document.getElementById('out-boomL').innerText = format(boomL, " m");
+        document.getElementById('out-stickL').innerText = format(stickL, " m");
+
         document.getElementById('resultsArea').style.display = "block";
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
         const now = new Date();
         reportData = `EXCAVATOR SURVEY REPORT\nDate: ${now.toLocaleString()}\n--------------------------\n` +
-            `Machine Heading: ${mH.toFixed(3)}°\nHeading Correction: ${hC.toFixed(3)}°\nAntenna H-Dist: ${antDist.toFixed(3)} m\n\n` +
-            `Boom Length: ${boomL.toFixed(3)} m\nStick Length: ${stickL.toFixed(3)} m`;
+            `Machine Heading: ${format(mH, "°")}\nHeading Correction: ${format(hC, "°")}\nAntenna H-Dist: ${format(antDist, " m")}\n\n` +
+            `Boom Length: ${format(boomL, " m")}\nStick Length: ${format(stickL, " m")}`;
     }
+
     function exportTxt() {
         if (!reportData) return;
         const blob = new Blob([reportData], { type: "text/plain" });
