@@ -3,168 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excavator Calculator - NMDC</title>
+    <title>Excavator Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0f172a; font-family: sans-serif; color: #e2e8f0; }
-        .container-box { max-width: 600px; margin: auto; padding: 20px; }
-        .header-section { text-align: center; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-        .card { background: #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
-        .section-title { color: #fbbf24; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; border-bottom: 1px solid #fbbf24; display: inline-block; }
-        label { display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 2px; }
-        input { width: 100%; background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 6px; color: white; margin-bottom: 8px; font-size: 0.9rem; }
-        .btn-calc { width: 100%; background: #059669; color: white; font-weight: bold; padding: 12px; border-radius: 6px; margin-top: 10px; cursor: pointer; text-transform: uppercase; }
-        .results-box { background: #1e293b; border-radius: 8px; padding: 15px; margin-top: 20px; border: 2px solid #0ea5e9; }
-        .result-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #334155; font-size: 0.85rem; }
-        .result-val { font-weight: bold; color: #38bdf8; }
-        .footer-text { text-align: center; font-size: 0.7rem; color: #64748b; margin-top: 20px; }
+        body { background-color: #f3f4f6; font-family: sans-serif; }
+        .input-card { background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        .section-title { color: #d97706; font-weight: bold; border-left: 4px solid #d97706; padding-left: 0.5rem; margin-bottom: 1rem; text-transform: uppercase; }
+        label { display: block; font-size: 0.875rem; color: #4b5563; margin-bottom: 0.25rem; }
+        input { width: 100%; border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 0.5rem; margin-bottom: 1rem; }
+        .result-row { border-bottom: 1px solid #374151; padding: 0.5rem 0; display: flex; justify-content: space-between; }
+        .install-box { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-top: 2rem; border: 1px solid #e5e7eb; }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-<div class="container-box">
-    <div class="header-section">
-        <h1 class="text-xl font-bold">Surveying & Calibration Tool</h1>
-        <p class="text-xs text-sky-400">Created by <span class="font-bold">Mohamed Shehata</span></p>
-    </div>
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-8 bg-[#1e293b] text-white py-6 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-bold">Excavator Calculator</h1>
+            <p class="text-sm opacity-80 mb-2">Measurements and Calibration Tool</p>
+            <div class="text-xs border-t border-gray-600 pt-2 inline-block">
+                Created by: <a href="https://www.linkedin.com/in/mohamed-shehata-a78b53147" target="_blank" class="text-blue-400 hover:underline">Mohamed Shehata</a>
+                <p class="mt-1 opacity-70 italic">Get in touch for support</p>
+            </div>
+        </header>
 
-    <div class="card flex justify-center p-0 overflow-hidden">
-        <img src="excavator-diagram.png" alt="Diagram" class="w-full">
-    </div>
+        <div class="input-card flex justify-center">
+            <img src="excavator-diagram.png" alt="Excavator Diagram" class="max-w-full h-auto rounded">
+        </div>
 
-    <div class="card">
-        <h2 class="section-title">Antennas (1 & 2)</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <div><label>X1</label><input type="number" id="x1" step="0.001"></div>
-            <div><label>Y1</label><input type="number" id="y1" step="0.001"></div>
-            <div><label>Z1</label><input type="number" id="z1" step="0.001"></div>
-            <div><label>X2</label><input type="number" id="x2" step="0.001"></div>
-            <div><label>Y2</label><input type="number" id="y2" step="0.001"></div>
-            <div><label>Z2</label><input type="number" id="z2" step="0.001"></div>
+        <div class="input-card">
+            <h2 class="section-title">Antennas (1 & 2)</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>X1</label><input type="number" id="x1" value="1000"></div>
+                <div><label>Y1</label><input type="number" id="y1" value="1000"></div>
+                <div><label>Z1</label><input type="number" id="z1" value="10"></div>
+                <div><label>X2</label><input type="number" id="x2" value="1005"></div>
+                <div><label>Y2</label><input type="number" id="y2" value="1000.5"></div>
+                <div><label>Z2</label><input type="number" id="z2" value="10"></div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <h2 class="section-title">Boom Pins (STB & PORT)</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>Xs (STB)</label><input type="number" id="xs" value="1003"></div>
+                <div><label>Ys (STB)</label><input type="number" id="ys" value="1008"></div>
+                <div><label>Zs (STB)</label><input type="number" id="zs" value="7.5"></div>
+                <div><label>Xp (PORT)</label><input type="number" id="xp" value="1002"></div>
+                <div><label>Yp (PORT)</label><input type="number" id="yp" value="1008"></div>
+                <div><label>Zp (PORT)</label><input type="number" id="zp" value="7.5"></div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <h2 class="section-title">Stick & Bucket Pins</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>Stick Pin X</label><input type="number" id="spx" value="1003"></div>
+                <div><label>Stick Pin Y</label><input type="number" id="spy" value="1015"></div>
+                <div><label>Stick Pin Z</label><input type="number" id="spz" value="15"></div>
+                <div><label>Bucket Pin X</label><input type="number" id="bpx" value="1003"></div>
+                <div><label>Bucket Pin Y</label><input type="number" id="bpy" value="1022"></div>
+                <div><label>Bucket Pin Z</label><input type="number" id="bpz" value="4"></div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <h2 class="section-title">Bucket Center</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>Xb</label><input type="number" id="xb" value="1002.5"></div>
+                <div><label>Yb</label><input type="number" id="yb" value="1021"></div>
+                <div><label>Zb</label><input type="number" id="zb" value="2"></div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <h2 class="section-title">S3 Pin</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>S3 Pin X</label><input type="number" id="s3px" value="1003"></div>
+                <div><label>S3 Pin Y</label><input type="number" id="s3py" value="1021.5"></div>
+                <div><label>S3 Pin Z</label><input type="number" id="s3pz" value="4.6"></div>
+            </div>
+        </div>
+
+        <div class="input-card">
+            <h2 class="section-title">Tooth Angle Inputs</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div><label>T1 (Side 1)</label><input type="number" id="t1" value="1.99"></div>
+                <div><label>T5 (Side 2)</label><input type="number" id="t5" value="0.575"></div>
+                <div><label>T1S (Side 3)</label><input type="number" id="t1s" value="2.02"></div>
+            </div>
+        </div>
+
+        <button onclick="calculate()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-lg shadow-lg transition-all mb-8 uppercase">
+            Calculate Results
+        </button>
+
+        <div id="results-area" class="hidden bg-[#0f172a] text-white p-6 rounded-lg shadow-xl mb-8">
+            <h2 class="text-orange-400 font-bold mb-4 border-b border-orange-400 pb-2 uppercase text-center">Calculation Results Report</h2>
+            
+            <div class="result-row"><span>Machine Heading:</span> <span id="res-heading">0.000°</span></div>
+            <div class="result-row"><span>Heading Correction:</span> <span id="res-corr">-84.289°</span></div>
+            <div class="result-row"><span>Antenna H-Distance:</span> <span id="res-hdist">5.025 m</span></div>
+            
+            <div class="mt-6 mb-2 text-emerald-400 font-semibold italic">Antenna 1 - Offsets From Boom Pin Center</div>
+            <div class="result-row"><span>Forward (Y):</span> <span id="a1-y">-8.000 m</span></div>
+            <div class="result-row"><span>Starboard (X):</span> <span id="a1-x">-2.500 m</span></div>
+            <div class="result-row"><span>Up (Z):</span> <span id="a1-z">2.500 m</span></div>
+
+            <div class="mt-6 mb-2 text-emerald-400 font-semibold italic">Antenna 2 - Offsets From Boom Pin Center</div>
+            <div class="result-row"><span>Forward (Y):</span> <span id="a2-y">-7.500 m</span></div>
+            <div class="result-row"><span>Starboard (X):</span> <span id="a2-x">2.500 m</span></div>
+            <div class="result-row"><span>Up (Z):</span> <span id="a2-z">2.500 m</span></div>
+
+            <div class="mt-6 border-t border-gray-700 pt-4"></div>
+            <div class="result-row"><span>Boom Length:</span> <span id="res-boom">10.271 m</span></div>
+            <div class="result-row"><span>Stick Length (S1):</span> <span id="res-stick">13.038 m</span></div>
+            <div class="result-row"><span>Stick Hor. Offset (S3):</span> <span id="res-s3">0.100 m</span></div>
+            <div class="result-row"><span>Tooth Angle (T6):</span> <span id="res-t6">84.727°</span></div>
+
+            <button onclick="exportTxt()" class="w-full mt-6 border border-emerald-400 text-emerald-400 py-3 rounded-lg hover:bg-emerald-400 hover:text-black font-bold transition-all">
+                Export Full Results (.txt)
+            </button>
+        </div>
+
+        <div class="install-box">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <span class="text-xl">📱</span>
+                <h3 class="font-bold text-slate-800 text-lg">How to Install as Mobile App:</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                <div class="pt-4 md:pt-0">
+                    <p class="font-bold text-blue-600 mb-1">iOS (Safari):</p>
+                    <p class="text-gray-600">Press <span class="font-bold">Share icon</span> &rarr; <span class="font-bold">Add to Home Screen</span></p>
+                </div>
+                <div class="pt-4 md:pt-0 md:pl-6">
+                    <p class="font-bold text-green-700 mb-1">Android (Chrome):</p>
+                    <p class="text-gray-600">Press <span class="font-bold">Menu (⋮)</span> &rarr; <span class="font-bold">Add to Home screen</span></p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="card">
-        <h2 class="section-title">Boom Pins (STB & PORT)</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <div><label>Xs (STB)</label><input type="number" id="xs" step="0.001"></div>
-            <div><label>Ys (STB)</label><input type="number" id="ys" step="0.001"></div>
-            <div><label>Zs (STB)</label><input type="number" id="zs" step="0.001"></div>
-            <div><label>Xp (PORT)</label><input type="number" id="xp" step="0.001"></div>
-            <div><label>Yp (PORT)</label><input type="number" id="yp" step="0.001"></div>
-            <div><label>Zp (PORT)</label><input type="number" id="zp" step="0.001"></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="section-title">Stick & Bucket Pins (Starboard)</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <div><label>Stick Pin X</label><input type="number" id="spx" step="0.001"></div>
-            <div><label>Stick Pin Y</label><input type="number" id="spy" step="0.001"></div>
-            <div><label>Stick Pin Z</label><input type="number" id="spz" step="0.001"></div>
-            <div><label>Bucket Pin X</label><input type="number" id="bpx" step="0.001"></div>
-            <div><label>Bucket Pin Y</label><input type="number" id="bpy" step="0.001"></div>
-            <div><label>Bucket Pin Z</label><input type="number" id="bpz" step="0.001"></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="section-title">Bucket Center</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <div><label>Xb</label><input type="number" id="xb" step="0.001"></div>
-            <div><label>Yb</label><input type="number" id="yb" step="0.001"></div>
-            <div><label>Zb</label><input type="number" id="zb" step="0.001"></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2 class="section-title">PDS Additional Inputs</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <div><label>S3 Pin X</label><input type="number" id="s3px" step="0.001"></div>
-            <div><label>S3 Pin Y</label><input type="number" id="s3py" step="0.001"></div>
-            <div><label>S3 Pin Z</label><input type="number" id="s3pz" step="0.001"></div>
-            <div><label>T1 (Side 1)</label><input type="number" id="t1" step="0.001"></div>
-            <div><label>T5 (Side 2)</label><input type="number" id="t5" step="0.001"></div>
-            <div><label>T1S (Side 3)</label><input type="number" id="t1s" step="0.001"></div>
-        </div>
-    </div>
-
-    <button class="btn-calc" onclick="calculate()">Calculate All Results</button>
-
-    <div id="results-area" class="hidden results-box">
-        <h3 class="text-center font-bold text-white mb-3 text-sm border-b border-gray-600 pb-2 uppercase">Calculation Results Report</h3>
-        
-        <div class="result-row"><span>Machine Heading:</span> <span id="res-heading" class="result-val">0.000°</span></div>
-        <div class="result-row"><span>Heading Correction:</span> <span class="result-val">0.000°</span></div>
-        <div class="result-row"><span>Antenna H-Distance:</span> <span id="res-hdist" class="result-val">0.000 m</span></div>
-        
-        <div class="text-emerald-400 text-xs font-bold mt-4 mb-2 italic">Antenna 1 - Offsets (Boom Pin Center)</div>
-        <div class="result-row"><span>Forward (Y):</span> <span id="a1-y" class="result-val">0.000 m</span></div>
-        <div class="result-row"><span>Starboard (X):</span> <span id="a1-x" class="result-val">0.000 m</span></div>
-        <div class="result-row"><span>Up (Z):</span> <span id="a1-z" class="result-val">0.000 m</span></div>
-
-        <div class="text-emerald-400 text-xs font-bold mt-4 mb-2 italic">PDS Calibration Values</div>
-        <div class="result-row"><span>Boom Length:</span> <span id="res-boom" class="result-val">0.000 m</span></div>
-        <div class="result-row"><span>Stick Length (S1):</span> <span id="res-stick" class="result-val">0.000 m</span></div>
-        <div class="result-row"><span>Stick Hor. Offset (S3):</span> <span id="res-s3" class="result-val">0.000 m</span></div>
-        <div class="result-row"><span>Tooth Angle (T6):</span> <span id="res-t6" class="result-val">0.000°</span></div>
-        
-        <button class="w-full mt-4 bg-sky-600 text-white text-xs py-2 rounded" onclick="window.print()">Export Full Results (.txt)</button>
-    </div>
-
-    <div class="footer-text">Created by Mohamed Shehata - NMDC</div>
-</div>
-
-<script>
-    function getV(id) { return parseFloat(document.getElementById(id).value) || 0; }
-
-    function calculate() {
-        const x1 = getV('x1'), y1 = getV('y1'), z1 = getV('z1');
-        const x2 = getV('x2'), y2 = getV('y2'), z2 = getV('z2');
-        const xs = getV('xs'), ys = getV('ys'), zs = getV('zs');
-        const xp = getV('xp'), yp = getV('yp'), zp = getV('zp');
-        const spx = getV('spx'), spy = getV('spy'), spz = getV('spz');
-        const bpx = getV('bpx'), bpy = getV('bpy'), bpz = getV('bpz');
-        const s3px = getV('s3px'), s3py = getV('s3py'), s3pz = getV('s3pz');
-        const t1 = getV('t1'), t5 = getV('t5'), t1s = getV('t1s');
-
-        // 1. Heading & H-Dist
-        const hDist = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-        const heading = (Math.atan2(x2 - x1, y2 - y1) * 180 / Math.PI + 360) % 360;
-
-        // 2. Boom Center Reference
-        const bMidX = (xs + xp) / 2, bMidY = (ys + yp) / 2, bMidZ = (zs + zp) / 2;
-
-        // 3. Rotation Matrix for Local Offsets
-        const rad = -heading * Math.PI / 180;
-        const dx1 = x1 - bMidX, dy1 = y1 - bMidY;
-        const a1LocalX = dx1 * Math.cos(rad) - dy1 * Math.sin(rad);
-        const a1LocalY = dx1 * Math.sin(rad) + dy1 * Math.cos(rad);
-
-        // 4. Dimensions
-        const boomLen = Math.sqrt(Math.pow(spx-bMidX, 2) + Math.pow(spy-bMidY, 2) + Math.pow(spz-bMidZ, 2));
-        const s1 = Math.sqrt(Math.pow(bpx-spx, 2) + Math.pow(bpy-spy, 2) + Math.pow(bpz-spz, 2));
-        const s3 = Math.sqrt(Math.pow(s3px-spx, 2) + Math.pow(s3py-spy, 2) + Math.pow(s3pz-spz, 2));
-
-        // 5. T6 Angle
-        let t6 = 0;
-        if(t1 > 0 && t5 > 0) {
-            t6 = Math.acos((t1**2 + t5**2 - t1s**2) / (2 * t1 * t5)) * 180 / Math.PI;
+    <script>
+        function calculate() {
+            // منطق الحساب يوضع هنا، حالياً يقوم فقط بإظهار القسم
+            document.getElementById('results-area').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('results-area').offsetTop - 50, behavior: 'smooth' });
         }
 
-        // Output
-        document.getElementById('res-heading').innerText = heading.toFixed(3) + "°";
-        document.getElementById('res-hdist').innerText = hDist.toFixed(3) + " m";
-        document.getElementById('a1-x').innerText = a1LocalX.toFixed(3) + " m";
-        document.getElementById('a1-y').innerText = a1LocalY.toFixed(3) + " m";
-        document.getElementById('a1-z').innerText = (z1 - bMidZ).toFixed(3) + " m";
-        document.getElementById('res-boom').innerText = boomLen.toFixed(3) + " m";
-        document.getElementById('res-stick').innerText = s1.toFixed(3) + " m";
-        document.getElementById('res-s3').innerText = s3.toFixed(3) + " m";
-        document.getElementById('res-t6').innerText = (isNaN(t6) ? 0 : t6).toFixed(3) + "°";
+        function exportTxt() {
+            // تجميع كافة البيانات للتقرير
+            const data = {
+                heading: document.getElementById('res-heading').innerText,
+                corr: document.getElementById('res-corr').innerText,
+                hdist: document.getElementById('res-hdist').innerText,
+                a1y: document.getElementById('a1-y').innerText,
+                a1x: document.getElementById('a1-x').innerText,
+                a1z: document.getElementById('a1-z').innerText,
+                a2y: document.getElementById('a2-y').innerText,
+                a2x: document.getElementById('a2-x').innerText,
+                a2z: document.getElementById('a2-z').innerText,
+                boom: document.getElementById('res-boom').innerText,
+                stick: document.getElementById('res-stick').innerText,
+                s3: document.getElementById('res-s3').innerText,
+                t6: document.getElementById('res-t6').innerText
+            };
 
-        document.getElementById('results-area').classList.remove('hidden');
-    }
-</script>
+            let content = `====================================\n`;
+            content += `   EXCAVATOR CALIBRATION REPORT\n`;
+            content += `====================================\n`;
+            content += `Date: ${new Date().toLocaleString()}\n\n`;
+            content += `GENERAL RESULTS:\n`;
+            content += `- Machine Heading: ${data.heading}\n`;
+            content += `- Heading Correction: ${data.corr}\n`;
+            content += `- Antenna H-Distance: ${data.hdist}\n\n`;
+            content += `ANTENNA 1 OFFSETS (Boom Pin Center):\n`;
+            content += `- Forward (Y): ${data.a1y}\n`;
+            content += `- Starboard (X): ${data.a1x}\n`;
+            content += `- Up (Z): ${data.a1z}\n\n`;
+            content += `ANTENNA 2 OFFSETS (Boom Pin Center):\n`;
+            content += `- Forward (Y): ${data.a2y}\n`;
+            content += `- Starboard (X): ${data.a2x}\n`;
+            content += `- Up (Z): ${data.a2z}\n\n`;
+            content += `DIMENSIONS & CALIBRATION:\n`;
+            content += `- Boom Length: ${data.boom}\n`;
+            content += `- Stick Length (S1): ${data.stick}\n`;
+            content += `- Stick Hor. Offset (S3): ${data.s3}\n`;
+            content += `- Tooth Angle (T6): ${data.t6}\n`;
+            content += `\n====================================\n`;
+            content += `Created by Mohamed Shehata - NMDC`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `Excavator_Full_Report_${new Date().getTime()}.txt`;
+            link.click();
+        }
+    </script>
 </body>
 </html>
