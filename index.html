@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excavator Calculator</title>
+    <title>Excavator Calculator - Professional Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #f3f4f6; font-family: sans-serif; }
@@ -12,7 +12,6 @@
         label { display: block; font-size: 0.875rem; color: #4b5563; margin-bottom: 0.25rem; }
         input { width: 100%; border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 0.5rem; margin-bottom: 1rem; }
         .result-row { border-bottom: 1px solid #374151; padding: 0.5rem 0; display: flex; justify-content: space-between; }
-        .install-box { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); margin-top: 2rem; border: 1px solid #e5e7eb; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -20,192 +19,129 @@
     <div class="max-w-4xl mx-auto">
         <header class="text-center mb-8 bg-[#1e293b] text-white py-6 rounded-lg shadow-lg">
             <h1 class="text-2xl font-bold">Excavator Calculator</h1>
-            <p class="text-sm opacity-80 mb-2">Measurements and Calibration Tool</p>
+            <p class="text-sm opacity-80 mb-2">Hydrographic & Engineering Calibration Tool</p>
             <div class="text-xs border-t border-gray-600 pt-2 inline-block">
                 Created by: <a href="https://www.linkedin.com/in/mohamed-shehata-a78b53147" target="_blank" class="text-blue-400 hover:underline">Mohamed Shehata</a>
-                <p class="mt-1 opacity-70 italic">Get in touch for support</p>
             </div>
         </header>
 
-        <div class="input-card flex justify-center">
-            <img src="excavator-diagram.png" alt="Excavator Diagram" class="max-w-full h-auto rounded">
-        </div>
+        <!-- Inputs Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Antenna Section -->
+            <div class="input-card">
+                <h2 class="section-title">GNSS Antennas (PNT 1 & 2)</h2>
+                <div class="grid grid-cols-3 gap-2">
+                    <div><label>X1</label><input type="number" id="x1" step="0.001"></div>
+                    <div><label>Y1</label><input type="number" id="y1" step="0.001"></div>
+                    <div><label>Z1</label><input type="number" id="z1" step="0.001"></div>
+                    <div><label>X2</label><input type="number" id="x2" step="0.001"></div>
+                    <div><label>Y2</label><input type="number" id="y2" step="0.001"></div>
+                    <div><label>Z2</label><input type="number" id="z2" step="0.001"></div>
+                </div>
+            </div>
 
-        <div class="input-card">
-            <h2 class="section-title">Antennas (1 & 2)</h2>
-            <div class="grid grid-cols-3 gap-4">
-                <div><label>X1</label><input type="number" id="x1" placeholder="0.000"></div>
-                <div><label>Y1</label><input type="number" id="y1" placeholder="0.000"></div>
-                <div><label>Z1</label><input type="number" id="z1" placeholder="0.000"></div>
-                <div><label>X2</label><input type="number" id="x2" placeholder="0.000"></div>
-                <div><label>Y2</label><input type="number" id="y2" placeholder="0.000"></div>
-                <div><label>Z2</label><input type="number" id="z2" placeholder="0.000"></div>
+            <!-- Boom Pin Section -->
+            <div class="input-card">
+                <h2 class="section-title">Boom Pins (Pivot)</h2>
+                <div class="grid grid-cols-3 gap-2">
+                    <div><label>Xs (STB)</label><input type="number" id="xs" step="0.001"></div>
+                    <div><label>Ys (STB)</label><input type="number" id="ys" step="0.001"></div>
+                    <div><label>Zs (STB)</label><input type="number" id="zs" step="0.001"></div>
+                    <div><label>Xp (PORT)</label><input type="number" id="xp" step="0.001"></div>
+                    <div><label>Yp (PORT)</label><input type="number" id="yp" step="0.001"></div>
+                    <div><label>Zp (PORT)</label><input type="number" id="zp" step="0.001"></div>
+                </div>
             </div>
         </div>
 
         <div class="input-card">
-            <h2 class="section-title">Boom Pins (STB & PORT)</h2>
+            <h2 class="section-title">Stick, Bucket & S3 Pins</h2>
             <div class="grid grid-cols-3 gap-4">
-                <div><label>Xs (STB)</label><input type="number" id="xs" placeholder="0.000"></div>
-                <div><label>Ys (STB)</label><input type="number" id="ys" placeholder="0.000"></div>
-                <div><label>Zs (STB)</label><input type="number" id="zs" placeholder="0.000"></div>
-                <div><label>Xp (PORT)</label><input type="number" id="xp" placeholder="0.000"></div>
-                <div><label>Yp (PORT)</label><input type="number" id="yp" placeholder="0.000"></div>
-                <div><label>Zp (PORT)</label><input type="number" id="zp" placeholder="0.000"></div>
+                <div><label>Stick Pin X</label><input type="number" id="spx" step="0.001"></div>
+                <div><label>Stick Pin Y</label><input type="number" id="spy" step="0.001"></div>
+                <div><label>Stick Pin Z</label><input type="number" id="spz" step="0.001"></div>
+                <div><label>Bucket Pin X</label><input type="number" id="bpx" step="0.001"></div>
+                <div><label>Bucket Pin Y</label><input type="number" id="bpy" step="0.001"></div>
+                <div><label>Bucket Pin Z</label><input type="number" id="bpz" step="0.001"></div>
+                <div><label>S3 Pin X</label><input type="number" id="s3px" step="0.001"></div>
+                <div><label>S3 Pin Y</label><input type="number" id="s3py" step="0.001"></div>
+                <div><label>S3 Pin Z</label><input type="number" id="s3pz" step="0.001"></div>
             </div>
         </div>
 
         <div class="input-card">
-            <h2 class="section-title">Stick & Bucket Pins</h2>
+            <h2 class="section-title">Tooth Angle (T1, T5, T1S)</h2>
             <div class="grid grid-cols-3 gap-4">
-                <div><label>Stick Pin X</label><input type="number" id="spx" placeholder="0.000"></div>
-                <div><label>Stick Pin Y</label><input type="number" id="spy" placeholder="0.000"></div>
-                <div><label>Stick Pin Z</label><input type="number" id="spz" placeholder="0.000"></div>
-                <div><label>Bucket Pin X</label><input type="number" id="bpx" placeholder="0.000"></div>
-                <div><label>Bucket Pin Y</label><input type="number" id="bpy" placeholder="0.000"></div>
-                <div><label>Bucket Pin Z</label><input type="number" id="bpz" placeholder="0.000"></div>
+                <div><label>T1 (Side 1)</label><input type="number" id="t1" step="0.001"></div>
+                <div><label>T5 (Side 2)</label><input type="number" id="t5" step="0.001"></div>
+                <div><label>T1S (Side 3)</label><input type="number" id="t1s" step="0.001"></div>
             </div>
         </div>
 
-        <div class="input-card">
-            <h2 class="section-title">Bucket Center</h2>
-            <div class="grid grid-cols-3 gap-4">
-                <div><label>Xb</label><input type="number" id="xb" placeholder="0.000"></div>
-                <div><label>Yb</label><input type="number" id="yb" placeholder="0.000"></div>
-                <div><label>Zb</label><input type="number" id="zb" placeholder="0.000"></div>
-            </div>
-        </div>
+        <button onclick="calculate()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-lg mb-8 uppercase">Calculate</button>
 
-        <div class="input-card">
-            <h2 class="section-title">S3 Pin</h2>
-            <div class="grid grid-cols-3 gap-4">
-                <div><label>S3 Pin X</label><input type="number" id="s3px" placeholder="0.000"></div>
-                <div><label>S3 Pin Y</label><input type="number" id="s3py" placeholder="0.000"></div>
-                <div><label>S3 Pin Z</label><input type="number" id="s3pz" placeholder="0.000"></div>
-            </div>
-        </div>
-
-        <div class="input-card">
-            <h2 class="section-title">Tooth Angle Inputs</h2>
-            <div class="grid grid-cols-3 gap-4">
-                <div><label>T1 (Side 1)</label><input type="number" id="t1" placeholder="0.000"></div>
-                <div><label>T5 (Side 2)</label><input type="number" id="t5" placeholder="0.000"></div>
-                <div><label>T1S (Side 3)</label><input type="number" id="t1s" placeholder="0.000"></div>
-            </div>
-        </div>
-
-        <button onclick="calculate()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-lg shadow-lg transition-all mb-8 uppercase">
-            Calculate Results
-        </button>
-
+        <!-- Results Area -->
         <div id="results-area" class="hidden bg-[#0f172a] text-white p-6 rounded-lg shadow-xl mb-8">
-            <h2 class="text-orange-400 font-bold mb-4 border-b border-orange-400 pb-2 uppercase text-center">Calculation Results Report</h2>
-            
+            <h2 class="text-orange-400 font-bold mb-4 border-b border-orange-400 pb-2 text-center uppercase">Report</h2>
             <div class="result-row"><span>Machine Heading:</span> <span id="res-heading">0.000°</span></div>
-            <div class="result-row"><span>Heading Correction:</span> <span id="res-corr">0.000°</span></div>
             <div class="result-row"><span>Antenna H-Distance:</span> <span id="res-hdist">0.000 m</span></div>
+            <div class="result-row"><span>Boom Length:</span> <span id="res-boom">0.000 m</span></div>
+            <div class="result-row"><span>Stick Length (S1):</span> <span id="res-stick">0.000 m</span></div>
+            <div class="result-row"><span>Tooth Angle (T6):</span> <span id="res-t6">0.000°</span></div>
             
-            <div class="mt-6 mb-2 text-emerald-400 font-semibold italic">Antenna 1 - Offsets From Boom Pin Center</div>
+            <div class="mt-4 text-emerald-400 italic">A1 Offsets (Ref: Boom Pin Center)</div>
             <div class="result-row"><span>Forward (Y):</span> <span id="a1-y">0.000 m</span></div>
             <div class="result-row"><span>Starboard (X):</span> <span id="a1-x">0.000 m</span></div>
             <div class="result-row"><span>Up (Z):</span> <span id="a1-z">0.000 m</span></div>
-
-            <div class="mt-6 mb-2 text-emerald-400 font-semibold italic">Antenna 2 - Offsets From Boom Pin Center</div>
-            <div class="result-row"><span>Forward (Y):</span> <span id="a2-y">0.000 m</span></div>
-            <div class="result-row"><span>Starboard (X):</span> <span id="a2-x">0.000 m</span></div>
-            <div class="result-row"><span>Up (Z):</span> <span id="a2-z">0.000 m</span></div>
-
-            <div class="mt-6 border-t border-gray-700 pt-4"></div>
-            <div class="result-row"><span>Boom Length:</span> <span id="res-boom">0.000 m</span></div>
-            <div class="result-row"><span>Stick Length (S1):</span> <span id="res-stick">0.000 m</span></div>
-            <div class="result-row"><span>Stick Hor. Offset (S3):</span> <span id="res-s3">0.000 m</span></div>
-            <div class="result-row"><span>Tooth Angle (T6):</span> <span id="res-t6">0.000°</span></div>
-
-            <button onclick="exportTxt()" class="w-full mt-6 border border-emerald-400 text-emerald-400 py-3 rounded-lg hover:bg-emerald-400 hover:text-black font-bold transition-all">
-                Export Full Results (.txt)
-            </button>
-        </div>
-
-        <div class="install-box">
-            <div class="flex items-center justify-center gap-2 mb-4">
-                <span class="text-xl">📱</span>
-                <h3 class="font-bold text-slate-800 text-lg">How to Install as Mobile App:</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-200">
-                <div class="pt-4 md:pt-0">
-                    <p class="font-bold text-blue-600 mb-1">iOS (Safari):</p>
-                    <p class="text-gray-600">Press <span class="font-bold">Share icon</span> &rarr; <span class="font-bold">Add to Home Screen</span></p>
-                </div>
-                <div class="pt-4 md:pt-0 md:pl-6">
-                    <p class="font-bold text-green-700 mb-1">Android (Chrome):</p>
-                    <p class="text-gray-600">Press <span class="font-bold">Menu (⋮)</span> &rarr; <span class="font-bold">Add to Home screen</span></p>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
-        function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+        function getV(id) { return parseFloat(document.getElementById(id).value) || 0; }
 
         function calculate() {
-            // 1. Get Values
-            const x1 = getVal('x1'), y1 = getVal('y1'), z1 = getVal('z1');
-            const x2 = getVal('x2'), y2 = getVal('y2'), z2 = getVal('z2');
-            const xs = getVal('xs'), ys = getVal('ys'), zs = getVal('zs');
-            const xp = getVal('xp'), yp = getVal('yp'), zp = getVal('zp');
-            const spx = getVal('spx'), spy = getVal('spy'), spz = getVal('spz');
-            const bpx = getVal('bpx'), bpy = getVal('bpy'), bpz = getVal('bpz');
-            const xb = getVal('xb'), yb = getVal('yb'), zb = getVal('zb');
-            const s3px = getVal('s3px'), s3py = getVal('s3py'), s3pz = getVal('s3pz');
-            const t1 = getVal('t1'), t5 = getVal('t5'), t1s = getVal('t1s');
+            // Inputs
+            const x1 = getV('x1'), y1 = getV('y1'), z1 = getV('z1');
+            const x2 = getV('x2'), y2 = getV('y2'), z2 = getV('z2');
+            const xs = getV('xs'), ys = getV('ys'), zs = getV('zs');
+            const xp = getV('xp'), yp = getV('yp'), zp = getV('zp');
+            const spx = getV('spx'), spy = getV('spy'), spz = getV('spz');
+            const bpx = getV('bpx'), bpy = getV('bpy'), bpz = getV('bpz');
+            const t1 = getV('t1'), t5 = getV('t5'), t1s = getV('t1s');
 
-            // 2. Calculations (Simplified for visibility)
+            // 1. Calculations - 3D Distance Formula
+            const hDist = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
             const boomMidX = (xs + xp) / 2;
             const boomMidY = (ys + yp) / 2;
             const boomMidZ = (zs + zp) / 2;
 
-            // Example Heading & Offsets Logic
-            const heading = Math.atan2(x2 - x1, y2 - y1) * (180 / Math.PI);
-            const hDist = Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
-            
-            // Stick S1 and S3 logic
-            const s1 = Math.sqrt(Math.pow(spy - bpy, 2) + Math.pow(spx - bpx, 2));
-            const s3 = Math.sqrt(Math.pow(s3py - bpy, 2) + Math.pow(s3px - bpx, 2)); // Offset example
+            // 2. Heading (Survey Grade)
+            let heading = Math.atan2(x2 - x1, y2 - y1) * (180 / Math.PI);
+            if (heading < 0) heading += 360;
 
-            // Tooth Angle T6 logic
-            const t6 = Math.acos((Math.pow(t1,2) + Math.pow(t5,2) - Math.pow(t1s,2)) / (2 * t1 * t5)) * (180 / Math.PI);
+            // 3. Structural Lengths
+            const boomLen = Math.sqrt(Math.pow(spx-boomMidX, 2) + Math.pow(spy-boomMidY, 2) + Math.pow(spz-boomMidZ, 2));
+            const stickLen = Math.sqrt(Math.pow(bpx-spx, 2) + Math.pow(bpy-spy, 2) + Math.pow(bpz-spz, 2));
 
-            // 3. Update UI
+            // 4. Tooth Angle (Law of Cosines)
+            let t6 = 0;
+            if (t1 > 0 && t5 > 0) {
+                const cosT6 = (Math.pow(t1, 2) + Math.pow(t5, 2) - Math.pow(t1s, 2)) / (2 * t1 * t5);
+                t6 = Math.acos(Math.max(-1, Math.min(1, cosT6))) * (180 / Math.PI);
+            }
+
+            // UI Update
             document.getElementById('res-heading').innerText = heading.toFixed(3) + "°";
             document.getElementById('res-hdist').innerText = hDist.toFixed(3) + " m";
+            document.getElementById('res-boom').innerText = boomLen.toFixed(3) + " m";
+            document.getElementById('res-stick').innerText = stickLen.toFixed(3) + " m";
+            document.getElementById('res-t6').innerText = t6.toFixed(3) + "°";
+            
             document.getElementById('a1-x').innerText = (x1 - boomMidX).toFixed(3) + " m";
             document.getElementById('a1-y').innerText = (y1 - boomMidY).toFixed(3) + " m";
             document.getElementById('a1-z').innerText = (z1 - boomMidZ).toFixed(3) + " m";
-            document.getElementById('a2-x').innerText = (x2 - boomMidX).toFixed(3) + " m";
-            document.getElementById('a2-y').innerText = (y2 - boomMidY).toFixed(3) + " m";
-            document.getElementById('a2-z').innerText = (z2 - boomMidZ).toFixed(3) + " m";
-            document.getElementById('res-stick').innerText = s1.toFixed(3) + " m";
-            document.getElementById('res-s3').innerText = s3.toFixed(3) + " m";
-            document.getElementById('res-t6').innerText = isNaN(t6) ? "0.000°" : t6.toFixed(3) + "°";
 
             document.getElementById('results-area').classList.remove('hidden');
-            window.scrollTo({ top: document.getElementById('results-area').offsetTop - 50, behavior: 'smooth' });
-        }
-
-        function exportTxt() {
-            let content = `====================================\n`;
-            content += `   EXCAVATOR CALIBRATION REPORT\n`;
-            content += `====================================\n`;
-            content += `Date: ${new Date().toLocaleString()}\n\n`;
-            content += `Stick Length (S1): ${document.getElementById('res-stick').innerText}\n`;
-            content += `Tooth Angle (T6): ${document.getElementById('res-t6').innerText}\n`;
-            content += `====================================`;
-
-            const blob = new Blob([content], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `Excavator_Report.txt`;
-            link.click();
         }
     </script>
 </body>
